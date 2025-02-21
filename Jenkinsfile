@@ -13,16 +13,16 @@ pipeline {
         stage('Test') {
             steps {
                 sh '''#!/bin/bash
-                echo 'Test Step: We run testing tool like pytest here'
+                echo 'Test Step: Running pytest with venv'
 
-                # TODO fill out the path to conda here
-                # sudo /PATH/TO/CONDA init
+                # Activate venv (adjust path if needed)
+                source mlip/bin/activate  # For Linux/Mac
+                # mlip\\Scripts\\activate  # Uncomment for Windows (if using PowerShell)
 
-                # TODO Complete the command to run pytest
-                # sudo /PATH/TO/CONDA run -n <Envinronment Name> <Command you want to run>
+                # Run pytest
+                pytest --maxfail=1 --disable-warnings
 
-                echo 'pytest not runned'
-                exit 1 #comment this line after implementing Jenkinsfile
+                echo 'Pytest completed successfully'
                 '''
 
             }
